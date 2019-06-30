@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.example.foodradar.R;
 
+import pl.bclogic.pulsator4droid.library.PulsatorLayout;
+
 /**
  * A simple {@link Fragment} subclass.
  */

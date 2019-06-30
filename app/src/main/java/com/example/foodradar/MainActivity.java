@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import pl.bclogic.pulsator4droid.library.PulsatorLayout;
+
 public class MainActivity extends AppCompatActivity {
     // for debugging purposes
     private static final String TAG = "My_message";
@@ -71,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Log.d(TAG, "Finished fab");
+
+        PulsatorLayout pulsator = (PulsatorLayout) findViewById(R.id.pulsator);
+        pulsator.start();
     }
 
     private void setupViewPager(ViewPager viewPager) {
