@@ -7,9 +7,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
@@ -21,6 +25,12 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
     // for debugging purposes
     private static final String TAG = "My_message";
+
+    /**
+     * Keeping track of fragment positions
+     */
+    private static final int HOME_POSITION = 0;
+    private static final int SETTINGS_POSITION = 1;
 
     /**
      * The {@link androidx.viewpager.widget.PagerAdapter} that will provide
@@ -37,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    /**
+     * The pulse pattern for the radar button
+     */
+    private PulsatorLayout pulsator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,27 +63,35 @@ public class MainActivity extends AppCompatActivity {
 //        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        mSectionsPageAdapter = new SectionsPageAdapter(fragmentManager);
 
-        Log.d(TAG, "after new SectionsPage Adapter");
+        pulsator = (PulsatorLayout) findViewById(R.id.pulsator);
+
+        fragmentManager.registerFragmentLifecycleCallbacks(new FragmentManager.FragmentLifecycleCallbacks() {
+            @Override
+            public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentResumed(fm, f);
+                if (f.equals(mSectionsPageAdapter.getItem(HOME_POSITION))) {
+                    pulsator.start();
+                } else if (f.equals(mSectionsPageAdapter.getItem(SETTINGS_POSITION))) {
+                    pulsator.stop();
+                }
+            }
+        }, true);
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
-        Log.d(TAG, "Finished setting Viewpager");
-
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        PulsatorLayout pulsator = (PulsatorLayout) findViewById(R.id.pulsator);
         pulsator.start();
-
-        Log.d(TAG, "Finished setting TabLayout");
     }
 
     private void setupViewPager(ViewPager viewPager) {
         // TODO: see if we can replace the words with icons in the future
-        Log.d(TAG, "setting ViewPager");
         mSectionsPageAdapter.addFragment(new HomeFragment(), "Home");
         mSectionsPageAdapter.addFragment(new SettingsFragment(), "Settings");
         viewPager.setAdapter(mSectionsPageAdapter);
