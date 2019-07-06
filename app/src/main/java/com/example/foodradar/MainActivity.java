@@ -47,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    /**
-     * The pulse pattern for the radar button
-     */
-    private PulsatorLayout pulsator;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,28 +61,12 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         mSectionsPageAdapter = new SectionsPageAdapter(fragmentManager);
 
-        pulsator = (PulsatorLayout) findViewById(R.id.pulsator);
-
-        fragmentManager.registerFragmentLifecycleCallbacks(new FragmentManager.FragmentLifecycleCallbacks() {
-            @Override
-            public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
-                super.onFragmentResumed(fm, f);
-                if (f.equals(mSectionsPageAdapter.getItem(HOME_POSITION))) {
-                    pulsator.start();
-                } else if (f.equals(mSectionsPageAdapter.getItem(SETTINGS_POSITION))) {
-                    pulsator.stop();
-                }
-            }
-        }, true);
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-        pulsator.start();
     }
 
     private void setupViewPager(ViewPager viewPager) {
