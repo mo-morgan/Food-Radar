@@ -75,8 +75,10 @@ public class MainActivity extends AppCompatActivity {
          * The tab layout function calls
          */
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+       // TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+       // tabLayout.setupWithViewPager(mViewPager);
+
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

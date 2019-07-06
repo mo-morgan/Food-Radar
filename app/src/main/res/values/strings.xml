@@ -9,4 +9,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="homeBackground_description">Home background image</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_recommended">Recommended</string>
+    <string name="menu_settings">Settings</string>
 </resources>
