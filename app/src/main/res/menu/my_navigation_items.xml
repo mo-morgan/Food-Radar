@@ -1,11 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/action_home"
         android:title="@string/menu_home"
-        android:icon="@drawable/ic_action_home" />
+        android:icon="@drawable/ic_home_black" />
+
     <item android:id="@+id/action_recommended"
         android:title="@string/menu_recommended"
-        android:icon="@drawable/ic_action_recommended" />
+        android:icon="@drawable/ic_recommended_black" />
+
     <item android:id="@+id/action_settings"
         android:title="@string/menu_settings"
-        android:icon="@drawable/ic_action_settings" />
+        android:icon="@drawable/ic_settings_black" />
 </menu>

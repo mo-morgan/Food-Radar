@@ -35,7 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:background="?android:attr/windowBackground"
+            android:background="#ffffff"
+            app:itemIconTint="@drawable/nav_item_colors"
+            app:itemTextColor="@drawable/nav_item_colors"
             app:menu="@menu/my_navigation_items"
             app:labelVisibilityMode="labeled" />
 
