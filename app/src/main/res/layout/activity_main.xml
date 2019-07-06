@@ -8,6 +8,15 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        android:text="@string/menu_home"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,21 +37,16 @@
 
         </RelativeLayout>
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/appbar_padding_top"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </com.google.android.material.tabs.TabLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
+            android:layout_gravity="start"
+            android:background="#ffffff"
+            app:itemIconTint="@drawable/nav_item_colors"
+            app:itemTextColor="@drawable/nav_item_colors"
+            app:menu="@menu/my_navigation_items"
+            app:labelVisibilityMode="labeled" />
 
     </LinearLayout>
 

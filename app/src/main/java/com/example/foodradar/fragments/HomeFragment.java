@@ -19,6 +19,8 @@ import com.example.foodradar.MainActivity;
 import com.example.foodradar.MapsActivity;
 import com.example.foodradar.R;
 
+import pl.bclogic.pulsator4droid.library.PulsatorLayout;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -60,5 +62,4 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
 }
