@@ -16,7 +16,6 @@ import com.example.foodradar.R;
  */
 public class SettingsFragment extends Fragment {
 
-
     public SettingsFragment() {
         // Required empty public constructor
     }
