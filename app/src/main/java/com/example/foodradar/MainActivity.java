@@ -21,6 +21,7 @@ import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     // for debugging purposes
@@ -54,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "setContentView");
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         FragmentManager fragmentManager = getSupportFragmentManager();
