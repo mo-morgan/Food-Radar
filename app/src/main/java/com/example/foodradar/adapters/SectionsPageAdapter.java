@@ -1,5 +1,7 @@
 package com.example.foodradar.adapters;
 
+import android.widget.LinearLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
