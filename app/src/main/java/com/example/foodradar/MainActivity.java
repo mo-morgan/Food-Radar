@@ -2,7 +2,9 @@ package com.example.foodradar;
 
 import com.example.foodradar.adapters.SectionsPageAdapter;
 import com.example.foodradar.fragments.HomeFragment;
+import com.example.foodradar.fragments.RecommendedFragment;
 import com.example.foodradar.fragments.SettingsFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -22,11 +24,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     // for debugging purposes
     private static final String TAG = "My_message";
 
@@ -56,11 +59,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //loading the default fragment
+        loadFragment(new HomeFragment());
+
+        //getting bottom navigation view and attaching the listener
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
+
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setExitTransition(new Explode());
         }
-
-        Log.d(TAG, "setContentView");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -68,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
         mSectionsPageAdapter = new SectionsPageAdapter(fragmentManager);
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        setupViewPager(mViewPager);
+        // mViewPager = (ViewPager) findViewById(R.id.container);
+        // setupViewPager(mViewPager);
+        // ^ this was morgan's code
 
        // TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
        // tabLayout.setupWithViewPager(mViewPager);
@@ -82,5 +93,38 @@ public class MainActivity extends AppCompatActivity {
         mSectionsPageAdapter.addFragment(new HomeFragment(), "Home");
         mSectionsPageAdapter.addFragment(new SettingsFragment(), "Settings");
         viewPager.setAdapter(mSectionsPageAdapter);
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                fragment = new HomeFragment();
+                break;
+
+            case R.id.action_recommended:
+                fragment = new RecommendedFragment();
+                break;
+
+            case R.id.action_settings:
+                fragment = new SettingsFragment();
+                break;
+        }
+
+        return loadFragment(fragment);
     }
 }
