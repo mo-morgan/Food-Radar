@@ -1,33 +1,20 @@
 package com.example.foodradar;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.foodradar.adapters.SectionsPageAdapter;
 import com.example.foodradar.fragments.HomeFragment;
 import com.example.foodradar.fragments.RecommendedFragment;
 import com.example.foodradar.fragments.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import pl.bclogic.pulsator4droid.library.PulsatorLayout;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.transition.Explode;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     // for debugging purposes

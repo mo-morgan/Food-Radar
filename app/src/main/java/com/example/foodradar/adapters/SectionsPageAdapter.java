@@ -1,14 +1,12 @@
 package com.example.foodradar.adapters;
 
-import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SectionsPageAdapter extends FragmentStatePagerAdapter {
     private static final String TAG = "My_message";

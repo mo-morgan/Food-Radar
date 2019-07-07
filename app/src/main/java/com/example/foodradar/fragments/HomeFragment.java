@@ -3,16 +3,11 @@ package com.example.foodradar.fragments;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
@@ -21,15 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.example.foodradar.MainActivity;
 import com.example.foodradar.MapsActivity;
 import com.example.foodradar.R;
 
-import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,6 +66,10 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    // TODO: Change animation to have a different layout for the loading screen
+    // FIXME
+    //  - HomeFragment set map, pulsator, and button layout to be INVISIBLE
+    //  - Replace the layout with a loading layout that has an icon in the middle
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void beginAnimation(View view) {
         RelativeLayout layoutContent = (RelativeLayout) getActivity().findViewById(R.id.home_layout);
@@ -86,7 +82,7 @@ public class HomeFragment extends Fragment {
         int endRadius = (int) Math.hypot(layoutContent.getWidth(), layoutContent.getHeight());
 
         Animator anim = ViewAnimationUtils.createCircularReveal(layoutContent, centerX, centerY, startRadius, endRadius);
-        anim.setDuration(1000);
+        anim.setDuration(1500);
 
         anim.addListener(new AnimatorListenerAdapter() {
             @Override
