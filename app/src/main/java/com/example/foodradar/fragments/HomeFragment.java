@@ -92,6 +92,11 @@ public class HomeFragment extends Fragment {
                 BottomNavigationView bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
                // TODO: this shouldn't be a problem once we change the loading screen
                 bottomNavigationView.setVisibility(View.INVISIBLE);
+
+                // So user cant click more than once causing more than one map to be loaded
+                Button searchButton = (Button) view.findViewById(R.id.search_button);
+                searchButton.setEnabled(false);
+
 //                view.setVisibility(View.INVISIBLE);
 //                pulsator.setVisibility(View.INVISIBLE);
             }

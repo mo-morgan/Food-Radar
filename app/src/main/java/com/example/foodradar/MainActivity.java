@@ -3,6 +3,7 @@ package com.example.foodradar;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,11 +63,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
+    /**
+     * On return from MapActivity, reset MainActivity to default
+     */
     @Override
     protected void onResume() {
         super.onResume();
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setVisibility(View.VISIBLE);
+
+        Button searchButton = (Button) findViewById(R.id.search_button);
+        searchButton.setEnabled(true);
     }
 
     private void setupViewPager(ViewPager viewPager) {
