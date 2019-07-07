@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private static final int HOME_POSITION = 0;
     private static final int SETTINGS_POSITION = 1;
 
+
     /**
      * The {@link androidx.viewpager.widget.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -66,26 +67,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setExitTransition(new Explode());
-        }
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         FragmentManager fragmentManager = getSupportFragmentManager();
         mSectionsPageAdapter = new SectionsPageAdapter(fragmentManager);
-
-        // Set up the ViewPager with the sections adapter.
-        // mViewPager = (ViewPager) findViewById(R.id.container);
-        // setupViewPager(mViewPager);
-        // ^ this was morgan's code
-
-       // TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-       // tabLayout.setupWithViewPager(mViewPager);
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {

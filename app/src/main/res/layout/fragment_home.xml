@@ -8,6 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
+        android:id="@+id/home_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -39,7 +40,8 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:background = "@drawable/circle_button"
-            android:text="Go"/>
+            android:text="Go"
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 
