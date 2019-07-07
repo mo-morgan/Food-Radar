@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 
 import com.example.foodradar.MapsActivity;
 import com.example.foodradar.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 /**
@@ -88,6 +89,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
+                BottomNavigationView bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
+               // TODO: this shouldn't be a problem once we change the loading screen
+                bottomNavigationView.setVisibility(View.INVISIBLE);
 //                view.setVisibility(View.INVISIBLE);
 //                pulsator.setVisibility(View.INVISIBLE);
             }

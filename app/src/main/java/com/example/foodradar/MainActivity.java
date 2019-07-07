@@ -2,6 +2,7 @@ package com.example.foodradar;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,6 +59,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         // primary sections of the activity.
         FragmentManager fragmentManager = getSupportFragmentManager();
         mSectionsPageAdapter = new SectionsPageAdapter(fragmentManager);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setVisibility(View.VISIBLE);
     }
 
     private void setupViewPager(ViewPager viewPager) {
