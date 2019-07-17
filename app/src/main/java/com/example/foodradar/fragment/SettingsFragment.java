@@ -1,4 +1,4 @@
-package com.example.foodradar.fragments;
+package com.example.foodradar.fragment;
 
 
 import android.os.Bundle;

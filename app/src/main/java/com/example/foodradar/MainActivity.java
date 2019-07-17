@@ -1,5 +1,6 @@
 package com.example.foodradar;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -7,15 +8,17 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.foodradar.adapters.SectionsPageAdapter;
-import com.example.foodradar.fragments.HomeFragment;
-import com.example.foodradar.fragments.RecommendedFragment;
-import com.example.foodradar.fragments.SettingsFragment;
+import com.example.foodradar.adapter.SectionsPageAdapter;
+import com.example.foodradar.fragment.HomeFragment;
+import com.example.foodradar.fragment.RecommendedFragment;
+import com.example.foodradar.fragment.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {

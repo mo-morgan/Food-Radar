@@ -1,4 +1,4 @@
-package com.example.foodradar.adapters;
+package com.example.foodradar.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
