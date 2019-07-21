@@ -29,6 +29,32 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.util.Arrays;
 
+/**
+ * FIXME Everything you need to know about this activity/layout (Listed by priorities):
+ *  -___SEARCH BAR___
+ *  - Decorate auto-complete search bar to have a unique color
+ *  - On search bar click, view should expand into suggestions, etc. (NEED DESIGNING)
+ *  - On place selected, view should switch the the place's location, as well as a small popup describing the restaurant
+ *  -   -> If user clicks the location again (or an expand button), it will go into restaurant activity, describing even more
+ *  -___MAP START___
+ *  - Immediately after activity starts (onCreate, not onResume or anything), set center to be user's location
+ *  - Auomatically search area for restaurants (and everytime user stops sliding for more than 1 sec or so)
+ *  - Begin loading the markers (of only restaurants ofc), clustering if necessary
+ *  - Markers should have a price tag $$, or $, or $$$$$$$ depending how expensive the restaurant is
+ *  -   -> as well as I guess the type of food? we have to design the markers
+ *  -   -> Favorite restaurants should display something different like a heart on top or smth
+ *  -___MAP LAYOUT___
+ *  - Top: the search bar, with an option to switch forth and between list-view (in case user hates maps)
+ *  - Map: the map ofc, with "Locate me" button on the side, and "Favorite", and "Filter" buttons as well
+ *  - Bottom: where the small popup describing the restaurant will be, covering approx. 1/3 the screen
+ *  -___FILTER___
+ *  - more on the design next time, but will give similar popup feeling to auto-complete
+ *  - after user selects a filter and presses done (or multiple filters), map should display only the filtered restaurants as markers
+ *  -___LIST VIEW___
+ *  - In case user hates maps and wants a list view, can be prioritized by location, etc.
+ *  - Will basically be what the map will be showing except in a list-view (users can filter this as well)
+ */
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     // for debugging purposes
     private static final String TAG = "My_message";
@@ -87,7 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
+                // TODO: Get info about the selected place, and then shift location to that place
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
             }
 
