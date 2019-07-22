@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.foodradar.adapter.SectionsPageAdapter;
 import com.example.foodradar.fragment.HomeFragment;
+import com.example.foodradar.fragment.LoadingFragment;
 import com.example.foodradar.fragment.RecommendedFragment;
 import com.example.foodradar.fragment.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -89,9 +90,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private boolean loadFragment(Fragment fragment) {
         //switching fragment
         if (fragment != null) {
+            LoadingFragment loadingFragment = new LoadingFragment();
+            loadingFragment.setFragment(fragment);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
+                    .replace(R.id.fragment_container, loadingFragment)
                     .commit();
             return true;
         }
