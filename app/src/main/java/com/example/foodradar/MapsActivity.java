@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -55,7 +57,8 @@ import java.util.Arrays;
  *  - Will basically be what the map will be showing except in a list-view (users can filter this as well)
  */
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity
+        implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     // for debugging purposes
     private static final String TAG = "My_message";
 
@@ -74,11 +77,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     private Location mLastKnownLocation;
+
     /**
      * Map location requesting variables
      */
     public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     public static boolean mLocationPermissionGranted = false;
+
+    /**
+     * List of markers that are currently displayed on the map
+     */
+    private ArrayList<Marker> mMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +108,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mLocationPermissionGranted = true;
         }
 
+        // instantiate a new list of markers
+        mMarkers = new ArrayList<>();
+
         // Initialize Places
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), BuildConfig.ApiKey);
@@ -108,13 +120,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place, and then shift location to that place
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+                LatLng latLng = place.getLatLng();
+                if (latLng != null) {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    Marker marker = mMap.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .title(place.getName()));
+                    mMarkers.add(marker);
+                } else {
+                    Log.d(TAG, "Missing LatLng for place");
+                }
             }
 
             @Override
@@ -233,5 +255,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch(SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
     }
 }
