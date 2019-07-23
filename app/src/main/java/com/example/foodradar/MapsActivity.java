@@ -121,8 +121,6 @@ public class MapsActivity extends FragmentActivity
                 == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "start debugging last known location");
             mLocationPermissionGranted = true;
-            updateLocationUI();
-            getDeviceLocation();
         }
     }
 
@@ -187,8 +185,6 @@ public class MapsActivity extends FragmentActivity
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
-
-        Log.d(TAG, String.valueOf(mLastKnownLocation));
     }
 
 
@@ -208,31 +204,31 @@ public class MapsActivity extends FragmentActivity
                 getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
         // Set which information to retrieve from the Place API
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS));
 
         // Set the location to be biased near the user location (first LatLng is SW, second is NE)
         if (loc != null) {
             Log.d(TAG, "set location bias");
             autocompleteFragment.setLocationBias(RectangularBounds.newInstance(
-                    new LatLng(loc.getLatitude() - 0.5, loc.getLongitude() - 0.5),
-                    new LatLng(loc.getLatitude() + 0.5, loc.getLongitude() + 0.5)
+                    new LatLng(loc.getLatitude() - 0.05, loc.getLongitude() - 0.05),
+                    new LatLng(loc.getLatitude() + 0.05, loc.getLongitude() + 0.05)
             ));
         }
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place, and then shift location to that place
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
                 LatLng latLng = place.getLatLng();
                 if (latLng != null) {
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
                     // If the marker is already displayed, don't add a new marker to the map
+
                     if (isLocationFree(latLng)) {
                         Marker marker = mMap.addMarker(new MarkerOptions()
                                 .position(latLng)
-                                .title(place.getName()));
+                                .title(place.getName())
+                                .snippet(place.getAddress()));
                         mMarkers.put(latLng, marker);
                         clickedMarker = marker;
                     } else {
