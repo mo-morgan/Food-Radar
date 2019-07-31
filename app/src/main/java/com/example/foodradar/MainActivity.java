@@ -1,6 +1,5 @@
 package com.example.foodradar;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,8 +7,6 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -90,11 +87,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private boolean loadFragment(Fragment fragment) {
         //switching fragment
         if (fragment != null) {
-            LoadingFragment loadingFragment = new LoadingFragment();
-            loadingFragment.setFragment(fragment);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, loadingFragment)
+                    .replace(R.id.fragment_container, fragment)
                     .commit();
             return true;
         }

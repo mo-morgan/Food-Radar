@@ -3,7 +3,6 @@ package com.example.foodradar.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.foodradar.R;
-
-import java.util.concurrent.TimeUnit;
-
-import static com.android.volley.VolleyLog.TAG;
 
 public class LoadingFragment extends Fragment {
     private static final String TAG = "My_message";
@@ -44,9 +39,7 @@ public class LoadingFragment extends Fragment {
     private boolean loadFragment() {
         //switching fragment
         if (fragmentToLoad != null) {
-            for (int i = 0; i < 100; i++) {
-                Log.d(TAG, "Loading!" + i);
-            }
+            Log.d(TAG, "Loading!");
             context.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragmentToLoad)
@@ -57,7 +50,7 @@ public class LoadingFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_load, container, false);
+        View view = inflater.inflate(R.layout.fragment_loading, container, false);
         new Thread(() -> loadFragment()).start();
         return view;
     }

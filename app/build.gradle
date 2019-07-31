@@ -10,7 +10,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resValue 'string', 'api_key', GOOGLE_MAP_KEY
-        buildConfigField'String', 'ApiKey', GOOGLE_MAP_KEY
+        buildConfigField 'String', 'ApiKey', GOOGLE_MAP_KEY
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
